@@ -115,6 +115,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
        ro.audio.spatializer_enabled=true
 
+# Audio CCA property
+PRODUCT_PROPERTY_OVERRIDES += \
+	persist.vendor.audio.cca.enabled=false
+
 # DCK properties based on target
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.gms.dck.eligible_wcc=2 \
@@ -145,12 +149,14 @@ ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.bluetooth.bqr.event_mask=295006 \
     persist.bluetooth.bqr.vnd_quality_mask=29 \
-    persist.bluetooth.bqr.vnd_trace_mask=0
+    persist.bluetooth.bqr.vnd_trace_mask=0 \
+    persist.bluetooth.vendor.btsnoop=true
 else
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.bluetooth.bqr.event_mask=295006 \
     persist.bluetooth.bqr.vnd_quality_mask=16 \
-    persist.bluetooth.bqr.vnd_trace_mask=0
+    persist.bluetooth.bqr.vnd_trace_mask=0 \
+    persist.bluetooth.vendor.btsnoop=false
 endif
 
 # Spatial Audio
@@ -180,6 +186,15 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Bluetooth LE Auido offload capabilities setting
 PRODUCT_COPY_FILES += \
 	device/google/shusky/bluetooth/le_audio_codec_capabilities.xml:$(TARGET_COPY_OUT_VENDOR)/etc/le_audio_codec_capabilities.xml
+
+# Bluetooth LE Audio CIS handover to SCO
+# Set the property only for the controller couldn't support CIS/SCO simultaneously. More detailed in b/242908683.
+PRODUCT_PRODUCT_PROPERTIES += \
+	persist.bluetooth.leaudio.notify.idle.during.call=true
+
+# Not support LE Audio dual mic SWB call based on the current launch strategy
+PRODUCT_PRODUCT_PROPERTIES += \
+    bluetooth.leaudio.dual_bidirection_swb.supported=false
 
 # Support One-Handed mode
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -229,6 +244,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_SOONG_NAMESPACES += vendor/google_devices/shusky/prebuilts
 
 # Location
+# SDK build system
+include device/google/gs-common/gps/brcm/device.mk
+
 PRODUCT_COPY_FILES += \
        device/google/shusky/location/gps.cer:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.cer
 
@@ -295,14 +313,27 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += vendor.display.lbe.supported=1
 
 # Vibrator HAL
 ACTUATOR_MODEL := luxshare_ict_081545
+ADAPTIVE_HAPTICS_FEATURE := adaptive_haptics_v1
 PRODUCT_VENDOR_PROPERTIES += \
     ro.vendor.vibrator.hal.chirp.enabled=0 \
     ro.vendor.vibrator.hal.device.mass=0.187 \
-    ro.vendor.vibrator.hal.loc.coeff=2.75
+    ro.vendor.vibrator.hal.loc.coeff=2.75 \
+    persist.vendor.vibrator.hal.context.enable=false \
+    persist.vendor.vibrator.hal.context.scale=60 \
+    persist.vendor.vibrator.hal.context.fade=true \
+    persist.vendor.vibrator.hal.context.cooldowntime=1600 \
+    persist.vendor.vibrator.hal.context.settlingtime=5000 \
+    ro.vendor.vibrator.hal.dbc.enable=true \
+    ro.vendor.vibrator.hal.dbc.envrelcoef=8353728 \
+    ro.vendor.vibrator.hal.dbc.riseheadroom=1909602 \
+    ro.vendor.vibrator.hal.dbc.fallheadroom=1909602 \
+    ro.vendor.vibrator.hal.dbc.txlvlthreshfs=2516583 \
+    ro.vendor.vibrator.hal.dbc.txlvlholdoffms=0 \
+    ro.vendor.vibrator.hal.pm.activetimeout=5
 
 # Increment the SVN for any official public releases
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=5
+    ro.vendor.build.svn=6
 
 # P23 Devices no longer need rlsservice
 PRODUCT_VENDOR_PROPERTIES += \
@@ -345,3 +376,11 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Enable camera exif model/make reporting
 PRODUCT_VENDOR_PROPERTIES += \
     persist.vendor.camera.exif_reveal_make_model=true
+
+# Enable DeviceAsWebcam support
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.usb.uvc.enabled=true
+
+# DisplayPort should be disabled by default (b/300167292)
+PRODUCT_VENDOR_PROPERTIES += \
+       persist.vendor.usb.displayport.enabled=0
