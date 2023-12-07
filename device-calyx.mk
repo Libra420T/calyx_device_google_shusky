@@ -21,6 +21,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/google/shusky/the_experiences.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/the_experiences.xml
 
+# Pixel Camera Services / Camera extensions
+PRODUCT_COPY_FILES += \
+    device/google/felix/permissions/permissions_com.google.android.apps.camera.services.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/permissions_com.google.android.apps.camera.services.xml
+
 TARGET_PREBUILT_KERNEL := device/google/shusky-kernel/Image.lz4
 
 # PowerShare
