@@ -1,5 +1,9 @@
 DEVICE_PACKAGE_OVERLAYS += device/google/shusky/overlay-calyx
 
+# ANGLE - Almost Native Graphics Layer Engine
+PRODUCT_PACKAGES += \
+    ANGLE
+
 # Display
 PRODUCT_COPY_FILES += \
     device/google/shusky/permissions/permissions_com.android.pixeldisplayservice.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/permissions_com.android.pixeldisplayservice.xml
@@ -65,9 +69,9 @@ PRODUCT_PACKAGES += \
 
 # Confirmation UI
 PRODUCT_PACKAGES += \
-    android.hardware.confirmationui@1.0.vendor \
     android.hardware.confirmationui-V1-ndk.vendor \
     android.hardware.confirmationui-lib.trusty \
+    android.hardware.confirmationui@1.0.vendor \
     libteeui_hal_support.vendor
 
 # Graphics
@@ -86,6 +90,10 @@ PRODUCT_PACKAGES += \
     android.hardware.identity-V5-ndk.vendor \
     android.hardware.identity-support-lib.vendor \
     android.hardware.identity_credential.xml
+
+# Json
+PRODUCT_PACKAGES += \
+    libjson
 
 # Nos
 PRODUCT_PACKAGES += \
@@ -119,8 +127,8 @@ PRODUCT_PACKAGES += \
 # Trusty
 PRODUCT_PACKAGES += \
     android.trusty.stats.nw.setter-cpp.vendor \
-    libbinder_trusty \
     lib_sensor_listener \
+    libbinder_trusty \
     libtrusty_metrics
 
 # Misc interfaces
@@ -169,15 +177,11 @@ PRODUCT_PACKAGES += \
     android.hardware.radio@1.5.vendor \
     android.hardware.radio@1.6.vendor \
     android.hardware.security.sharedsecret-V1-ndk.vendor \
+    android.hardware.thermal-V1-ndk.vendor \
     android.hardware.thermal@1.0.vendor \
     android.hardware.thermal@2.0.vendor \
-    android.hardware.thermal-V1-ndk.vendor \
     android.hardware.weaver-V2-ndk.vendor \
     android.hardware.wifi-V1-ndk.vendor \
     com.google.hardware.pixel.display-V4-ndk.vendor \
-    com.google.hardware.pixel.display-V6-ndk.vendor \
+    com.google.hardware.pixel.display-V9-ndk.vendor \
     hardware.google.ril_ext-V1-ndk.vendor
-
-# Misc
-PRODUCT_PACKAGES += \
-    libjson
