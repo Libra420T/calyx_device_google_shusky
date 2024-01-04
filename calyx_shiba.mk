@@ -13,9 +13,9 @@ PRODUCT_BRAND := google
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_PRODUCT=shiba \
-    PRIVATE_BUILD_DESC="shiba-user 14 UQ1A.231205.015 11084887 release-keys"
+    PRIVATE_BUILD_DESC="shiba-user 14 UQ1A.240105.004 11206848 release-keys"
 
-BUILD_FINGERPRINT := google/shiba/shiba:14/UQ1A.231205.015/11084887:user/release-keys
+BUILD_FINGERPRINT := google/shiba/shiba:14/UQ1A.240105.004/11206848:user/release-keys
 
 PRODUCT_RESTRICT_VENDOR_FILES := false
 
