@@ -23,7 +23,7 @@ PRODUCT_COPY_FILES += \
 
 # Pixel Camera Services / Camera extensions
 PRODUCT_COPY_FILES += \
-    device/google/felix/permissions/permissions_com.google.android.apps.camera.services.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/permissions_com.google.android.apps.camera.services.xml
+    device/google/shusky/permissions/permissions_com.google.android.apps.camera.services.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/permissions_com.google.android.apps.camera.services.xml
 
 TARGET_PREBUILT_KERNEL := device/google/shusky-kernel/Image.lz4
 
