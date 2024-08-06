@@ -14,9 +14,9 @@ PRODUCT_BRAND := google
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_PRODUCT=husky \
-    PRIVATE_BUILD_DESC="husky-user 14 AP2A.240705.005 11942872 release-keys"
+    PRIVATE_BUILD_DESC="husky-user 14 AP2A.240805.005 12025142 release-keys"
 
-BUILD_FINGERPRINT := google/husky/husky:14/AP2A.240705.005/11942872:user/release-keys
+BUILD_FINGERPRINT := google/husky/husky:14/AP2A.240805.005/12025142:user/release-keys
 
 PRODUCT_RESTRICT_VENDOR_FILES := false
 
